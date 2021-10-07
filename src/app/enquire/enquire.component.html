@@ -1,0 +1,211 @@
+<div class="row bg-color">
+  <div class="col-12">
+    <ul>
+      <li>Home</li>
+      <li>/</li>
+      <li>Dashboard</li>
+    </ul>
+  </div>
+  <div class="col-6">
+    <span class="users-list">Users List</span>
+  </div>
+  <div class="col-6 text-end">
+    <button type="submit" class="btn add-user" (click)="edit(templateAdd)">
+      + New User
+    </button>
+  </div>
+</div>
+<div class="container py-4 flex-container">
+  <div class="row first" [className]="showOnClick ? 'row pand' : 'row expand'">
+    <div class="row">
+      <div
+        [className]="
+          showOnClick ? 'col-8 easy col-title' : 'col-10 easy col-title'
+        "
+      >
+        <span>User</span>
+      </div>
+      <div class="col-2 easy col-title">
+        <span class="justfiy-text"> Actions</span>
+      </div>
+    </div>
+
+    <div *ngFor="let user of users">
+      <div class="row row-height" (click)="selectRow(user.id)">
+        <div [className]="showOnClick ? 'col-8 easy' : 'col-10 easy'">
+          <img class="img" [src]="user.avatar" />
+          <span class="span-img"
+            >{{ user.first_name }} {{ user.last_name }}</span
+          >
+        </div>
+        <div class="col-2 py-2">
+          <ul>
+            <li>
+              <div class="div-ico">
+                <img
+                  class="img-ico"
+                  src="../../assets/icons/icons8-edit.png"
+                  alt=""
+                />
+              </div>
+            </li>
+            <li>
+              <div class="div-ico">
+                <img
+                  class="img-ico"
+                  src="../../assets/icons/icons8-delete.png"
+                  alt=""
+                />
+              </div>
+            </li>
+            <li>
+              <div class="arrow-ico">></div>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <hr />
+    </div>
+    <div class="col-12 text-center">
+      <img src="../../assets/images/spinner.png" *ngIf="loading" />
+      <p class="load-users" (click)="loadUsers()">Loading more users</p>
+    </div>
+  </div>
+  <div [className]="showOnClick ? 'show shadow-div' : 'hide shadow-div'">
+    <span id="x" (click)="closeDetails()"> X </span>
+    <img class="img" [src]="singlUser?.avatar" />
+    <p class="p">{{ singlUser?.first_name }} {{ singlUser?.last_name }}</p>
+    <button type="button" class="btn edit" (click)="edit(templateEdit)">
+      <img src="../../assets/svg/edit.svg" alt="Kiwi standing on oval" />
+      Edit
+    </button>
+
+    <button type="button" class="btn delete" (click)="delete(templateDelete)">
+      <img src="../../assets/svg/delete.svg" alt="Kiwi standing on oval" />
+      Delete
+    </button>
+  </div>
+</div>
+
+<!-- start Delete modal -->
+<ng-template #templateDelete>
+  <!-- <div class="modal-header">
+    <h4 class="modal-title pull-left">Modal</h4>
+    <button type="button" class="btn-close close pull-right" aria-label="Close" (click)="modalRef?.hide()">
+      <span aria-hidden="true" class="visually-hidden">&times;</span>
+    </button>
+  </div> -->
+  <div class="modal-body">
+    <div class="row">
+      <div class="col-12">
+        <p class="dialog-p">Are you sure you want to delete</p>
+      </div>
+      <div class="col-12">
+        <p class="dialog-name">
+          {{ selectedUser?.first_name }} {{ selectedUser?.last_name }}
+        </p>
+      </div>
+      <div class="col-12">
+        <button type="button" class="btn no" (click)="declineDelete()">
+          No
+        </button>
+
+        <button
+          type="button"
+          class="btn yes"
+          (click)="confirmDelete(selectedUser?.id)"
+        >
+          Yes
+        </button>
+      </div>
+    </div>
+  </div>
+</ng-template>
+<!-- end Delete modal -->
+
+<!-- start Edit modal -->
+<ng-template #templateEdit>
+  <form [formGroup]="formEdit" class="form">
+    <div class="img-container">
+      <img class="img-in-modal" [src]="singlUser.avatar" />
+    </div>
+    <div class="modal-body">
+      <div class="form-group spaces-group">
+        <label for="name" class="modal-label">Name</label>
+        <input
+          type="text"
+          class="form-control modal-text"
+          id="name"
+          formControlName="name"
+          autocomplete="off"
+          aria-describedby="nameHelp"
+          placeholder="Name..."
+        />
+      </div>
+      <div class="form-group spaces-group">
+        <label for="jobTitle" class="modal-label">Job title </label>
+        <input
+          type="text"
+          class="form-control modal-text"
+          id="jobTitle"
+          formControlName="job"
+          placeholder="job title..."
+        />
+      </div>
+      <div class="row px-0 mx-0">
+        <button type="button" class="btn no" (click)="declineEdit()">
+          Cancel
+        </button>
+
+        <button type="button" class="btn yes" (click)="confirmEdit()">
+          Save
+        </button>
+      </div>
+    </div>
+  </form>
+</ng-template>
+<!-- end Edit modal -->
+
+<!-- start Add modal -->
+<ng-template #templateAdd>
+  <form [formGroup]="formAdd" class="form">
+    <div class="img-container">
+      <img class="img-in-modal" src="../../assets/images/icons8-user.png" />
+    </div>
+    <div class="modal-body">
+      <div class="form-group spaces-group">
+        <label for="name" class="modal-label">Name</label>
+        <input
+          type="text"
+          class="form-control modal-text"
+          id="name"
+          formControlName="name"
+          autocomplete="off"
+          aria-describedby="nameHelp"
+          placeholder="Name..."
+        />
+      </div>
+      <div class="form-group spaces-group">
+        <label for="jobTitle" class="modal-label">Job title </label>
+        <input
+          type="text"
+          class="form-control modal-text"
+          id="jobTitle"
+          formControlName="job"
+          placeholder="job title..."
+        />
+      </div>
+      <div class="row px-0 mx-0">
+        <button type="button" class="btn no" (click)="declineAdd()">
+          Cancel
+        </button>
+
+        <button type="button" class="btn yes" (click)="confirmAdd()">
+          Add
+        </button>
+      </div>
+    </div>
+  </form>
+</ng-template>
+<!-- end Add modal -->

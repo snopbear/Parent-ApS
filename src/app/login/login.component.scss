@@ -1,0 +1,76 @@
+a {
+  font-size: 14px;
+  color: #8E44AD;
+  text-decoration: none;
+}
+
+.form-group {
+  text-align: left !important;
+  padding: 10px 0;
+
+  label {
+    color: #7F8C8D;
+  }
+}
+
+.bg-login-image {
+  background: url("../../assets/images/Rectangle.png");
+  background-position: inherit;
+  background-size: inherit;
+  background-repeat: no-repeat;
+}
+
+.row-height {
+  height: 567px;
+}
+
+.p-top {
+  padding: 100px 10px 0;
+
+  .welcome {
+    color: #34495E;
+    font-size: 25px;
+  }
+
+  .access-dashboard {
+    color: #7F8C8D;
+    font-size: 15px;
+
+    code {
+      color: #8E44AD;
+      font-size: 15px;
+      font-weight: bold;
+    }
+  }
+}
+
+.btn-login {
+  background-color: #8E44AD;
+  color: #fff;
+  border-radius: 20px;
+  text-align: center;
+  width: 94px;
+  padding: 7px;
+  text-transform: uppercase;
+}
+
+.btn-login {
+  background-color: #8E44AD;
+  color: #fff;
+  border-radius: 20px;
+  text-align: center;
+  width: 94px;
+  padding: 7px;
+  text-transform: uppercase;
+
+}
+
+.btn-login[disabled] {
+  background-color: #c9c9c9;
+  color: #fff;
+  border-radius: 20px;
+  text-align: center;
+  width: 94px;
+  padding: 7px;
+  text-transform: uppercase;
+}

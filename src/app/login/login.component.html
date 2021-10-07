@@ -1,0 +1,77 @@
+<div class="container">
+  <!-- Outer Row -->
+  <div class="row justify-content-center">
+    <div class="col-xl-8 col-lg-12 col-md-9">
+      <div class="card o-hidden border-0 shadow-lg my-5">
+        <div class="card-body p-0">
+          <!-- Nested Row within Card Body -->
+          <div class="row row-height">
+            <div class="col-lg-5 d-none d-lg-block bg-login-image"></div>
+            <div class="col-lg-7 p-top">
+              <div class="p-2">
+                <div class="text-left py-3">
+                  <h1 class="welcome mb-4">Welcome Back!</h1>
+                  <span class="access-dashboard">
+                    Please login to access your <code>Spaces</code> Dashboard
+                  </span>
+                </div>
+                <form class="user" [formGroup]="form" (ngSubmit)="login()">
+                  <div
+                    class="form-group"
+                    [ngClass]="{ 'is-invalid': formErrors.email }"
+                  >
+                    <label for="Username">Username</label>
+                    <input
+                      type="text"
+                      class="form-control form-control-user"
+                      id="username"
+                      formControlName="username"
+                      autocomplete="off"
+                      aria-describedby="emailHelp"
+                      placeholder="Username..."
+                    />
+                    <code *ngIf="formErrors.email">
+                      {{ formErrors.email }}
+                    </code>
+                  </div>
+                  <div
+                    class="form-group"
+                    [ngClass]="{ 'is-invalid': formErrors.password }"
+                  >
+                    <label for="fullName">Password </label>
+                    <input
+                      type="password"
+                      class="form-control form-control-user"
+                      id="password"
+                      formControlName="password"
+                      placeholder="Password"
+                    />
+                    <code *ngIf="formErrors.password">
+                      {{ formErrors.password }}
+                    </code>
+                  </div>
+                  <div class="row">
+                    <div class="col-6">
+                      <div class="text-left">
+                        <a [routerLink]="['/register']">Forgot password? </a>
+                      </div>
+                    </div>
+                    <div class="col-6 text-end">
+                      <button
+                        type="submit"
+                        class="btn btn-login"
+                        [disabled]="!form.valid"
+                      >
+                        Login
+                      </button>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

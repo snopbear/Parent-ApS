@@ -1,0 +1,11 @@
+/* You can add global styles to this file, and also import other style files */
+@import '~bootstrap/dist/css/bootstrap.min.css';
+@font-face {
+    font-family: "SFNS";
+    src: local("SFNS"), url(./assets/font/SFNS-Display-Regular.ttf) format("truetype");
+}
+
+body{
+    font-family: "SFNS", Arial, Helvetica, sans-serif;
+ font-size: 15px;
+}
